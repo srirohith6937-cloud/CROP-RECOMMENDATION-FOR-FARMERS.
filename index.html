@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Sown — Sign In</title>
+<style>
+  :root{
+    --soil-dark: #2e1f14;
+    --soil-mid: #5c3d24;
+    --soil-warm: #8a5a32;
+    --ochre: #c17a2e;
+    --wheat: #e8c468;
+    --cream: #f6efe2;
+    --paper: #fbf7ef;
+    --ink: #2a2118;
+    --ink-soft: #5e5346;
+    --line: #ddd0b8;
+    --error: #a8432f;
+    --error-bg: #fbeae5;
+    --radius: 14px;
+    --serif: "Source Serif 4", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
+    --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
+    --mono: "JetBrains Mono", "SF Mono", Menlo, monospace;
+  }
+
+  *{ box-sizing: border-box; }
+  html, body{ margin:0; padding:0; }
+  body{
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  a{ color: inherit; }
+
+  .horizon{
+    height: 10px;
+    width: 100%;
+    background: linear-gradient(to right,
+      var(--wheat) 0%, var(--wheat) 14%,
+      var(--ochre) 14%, var(--ochre) 38%,
+      var(--soil-warm) 38%, var(--soil-warm) 66%,
+      var(--soil-mid) 66%, var(--soil-mid) 86%,
+      var(--soil-dark) 86%, var(--soil-dark) 100%);
+  }
+
+  .wrap{
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .auth-card{
+    background: var(--cream);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 32px 28px;
+    width: 100%;
+    max-width: 380px;
+  }
+
+  .eyebrow{
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ochre);
+    margin: 0 0 8px;
+    text-align: center;
+  }
+  h1{
+    font-family: var(--serif);
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.1;
+    margin: 0 0 6px;
+    color: var(--soil-dark);
+    text-align: center;
+  }
+  p.sub{
+    font-size: 14px;
+    color: var(--ink-soft);
+    margin: 0 0 24px;
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .field{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .field label{
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    font-weight: 600;
+  }
+  .field input{
+    font-family: var(--sans);
+    font-size: 16px;
+    padding: 12px 12px;
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+    transition: border-color 0.15s ease;
+  }
+  .field input:focus{
+    outline: none;
+    border-color: var(--ochre);
+  }
+
+  .row-between{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 4px 0 20px;
+    font-size: 12.5px;
+  }
+  .remember{
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--ink-soft);
+  }
+  .remember input{ accent-color: var(--ochre); }
+  .forgot-link{
+    color: var(--soil-warm);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .forgot-link:hover{ color: var(--ochre); }
+
+  .btn-primary{
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 16px;
+    padding: 14px 26px;
+    border-radius: 10px;
+    border: none;
+    background: var(--soil-dark);
+    color: var(--cream);
+    cursor: pointer;
+    width: 100%;
+    transition: transform 0.1s ease, background 0.15s ease;
+  }
+  .btn-primary:hover{ background: var(--ochre); }
+  .btn-primary:active{ transform: scale(0.98); }
+
+  .error-msg{
+    font-size: 13px;
+    color: var(--error);
+    background: var(--error-bg);
+    border-radius: 8px;
+    padding: 10px 12px;
+    margin-bottom: 16px;
+    display: none;
+  }
+
+  .divider{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 22px 0;
+    color: var(--ink-soft);
+    font-size: 11px;
+    font-family: var(--mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .divider::before, .divider::after{
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .signup-line{
+    text-align: center;
+    font-size: 13.5px;
+    color: var(--ink-soft);
+  }
+  .signup-line a{
+    color: var(--soil-dark);
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .signup-line a:hover{ color: var(--ochre); }
+
+</style>
+</head>
+<body>
+
+<div class="horizon"></div>
+
+<div class="wrap">
+  <div class="auth-card">
+    <p class="eyebrow">Sown</p>
+    <h1>Welcome back</h1>
+    <p class="sub">Sign in to get crop recommendations tailored to your soil and climate.</p>
+
+    <div class="error-msg" id="error-msg">Please enter both a username and password.</div>
+
+    <form id="login-form">
+      <div class="field">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" autocomplete="username" required>
+      </div>
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" autocomplete="current-password" required>
+      </div>
+
+      <div class="row-between">
+        <label class="remember">
+          <input type="checkbox" id="remember">
+          Remember me
+        </label>
+        <a href="#" class="forgot-link" id="forgot-link">Forgot password?</a>
+      </div>
+
+      <button type="submit" class="btn-primary">Sign In</button>
+    </form>
+
+    <div class="divider">or</div>
+    <p class="signup-line">Don't have an account? <a href="#" id="signup-link">Sign up</a></p>
+
+  </div>
+</div>
+
+<script>
+  // ---------- Open auth logic (no backend) ----------
+  // Any non-empty username/password is accepted. Replace this block with a
+  // real API/auth call (e.g. Firebase Auth, your own backend) later if you
+  // want actual account verification.
+  const form = document.getElementById("login-form");
+  const errorMsg = document.getElementById("error-msg");
+
+  form.addEventListener("submit", function(e){
+    e.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const remember = document.getElementById("remember").checked;
+
+    if(username.length > 0 && password.length > 0){
+      errorMsg.style.display = "none";
+      const storage = remember ? window.localStorage : window.sessionStorage;
+      storage.setItem("sown_logged_in", "true");
+      storage.setItem("sown_username", username);
+
+      // Redirect to the main crop recommendation app.
+      // Update this path if your app file has a different name.
+      window.location.href = "app.html";
+    } else {
+      errorMsg.style.display = "block";
+    }
+  });
+
+  document.getElementById("forgot-link").addEventListener("click", function(e){
+    e.preventDefault();
+    alert("This is a demo login screen — password recovery isn't wired up yet. Connect a real backend (e.g. Firebase Auth) to enable this.");
+  });
+
+  document.getElementById("signup-link").addEventListener("click", function(e){
+    e.preventDefault();
+    alert("This is a demo login screen — sign-up isn't wired up yet. Connect a real backend (e.g. Firebase Auth) to enable this.");
+  });
+</script>
+
+</body>
+</html>
